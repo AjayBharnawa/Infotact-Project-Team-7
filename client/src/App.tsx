@@ -1,7 +1,7 @@
-import DashboardLayout from "./app/layouts/DashboardLayout";
+import AppRoutes from "./app/router/AppRoutes";
 
 function App() {
-  return <DashboardLayout />;
+  return <AppRoutes />;
 }
 
 export default App;
