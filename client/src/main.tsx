@@ -1,13 +1,15 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { Toaster } from "sonner";
 
-import './index.css'
-import './styles/globals.css'
+import "./index.css";
+import "./styles/globals.css";
 
-import App from './App'
+import App from "./App";
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>,
-)
+    <Toaster richColors position="top-right" />
+  </React.StrictMode>
+);

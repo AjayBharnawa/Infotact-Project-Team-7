@@ -1,8 +1,14 @@
+import AuthLayout from "../components/AuthLayout";
+import LoginForm from "../components/LoginForm";
+
 const Login = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-slate-950 text-white">
-      Login Page
-    </div>
+    <AuthLayout
+      title="Welcome Back"
+      subtitle="Sign in to continue to your workspace"
+    >
+      <LoginForm />
+    </AuthLayout>
   );
 };
 

@@ -1,8 +1,14 @@
+import AuthLayout from "../components/AuthLayout";
+import RegisterForm from "../components/RegisterForm";
+
 const Register = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-slate-950 text-white">
-      Register Page
-    </div>
+    <AuthLayout
+      title="Create Account"
+      subtitle="Start collaborating with your team"
+    >
+      <RegisterForm />
+    </AuthLayout>
   );
 };
 

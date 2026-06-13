@@ -1,29 +1,107 @@
+import {
+  Users,
+  Hash,
+  FileText,
+  MessageSquare,
+} from "lucide-react";
+
+import { useWorkspaceStore } from "../../../store/workspaceStore";
+
 const Dashboard = () => {
+  const members = useWorkspaceStore(
+    (state) => state.members
+  );
+
+  const channels = useWorkspaceStore(
+    (state) => state.channels
+  );
+
+  const documents = useWorkspaceStore(
+    (state) => state.documents
+  );
+
+  const stats = [
+    {
+      title: "Members",
+      value: members.length,
+      icon: Users,
+    },
+    {
+      title: "Channels",
+      value: channels.length,
+      icon: Hash,
+    },
+    {
+      title: "Documents",
+      value: documents.length,
+      icon: FileText,
+    },
+    {
+      title: "Messages",
+      value: "1.2k",
+      icon: MessageSquare,
+    },
+  ];
+
   return (
-    <div>
-      <h1 className="mb-8 text-3xl font-bold text-white">
-        Workspace Overview
-      </h1>
+    <div className="space-y-8">
+      <div>
+        <h1 className="text-3xl font-bold text-white">
+          Workspace Overview
+        </h1>
 
+        <p className="mt-2 text-slate-400">
+          Welcome back. Here's what's happening in your workspace.
+        </p>
+      </div>
+
+      {/* Stats Cards */}
       <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-        <div className="rounded-2xl border border-slate-800 bg-slate-900 p-5">
-          <p className="text-slate-400">Total Members</p>
-          <h2 className="mt-3 text-4xl font-bold text-white">48</h2>
-        </div>
+        {stats.map((stat) => {
+          const Icon = stat.icon;
 
-        <div className="rounded-2xl border border-slate-800 bg-slate-900 p-5">
-          <p className="text-slate-400">Active Channels</p>
-          <h2 className="mt-3 text-4xl font-bold text-white">12</h2>
-        </div>
+          return (
+            <div
+              key={stat.title}
+              className="rounded-2xl border border-slate-800 bg-slate-900 p-6"
+            >
+              <div className="mb-4 flex items-center justify-between">
+                <p className="text-slate-400">
+                  {stat.title}
+                </p>
 
-        <div className="rounded-2xl border border-slate-800 bg-slate-900 p-5">
-          <p className="text-slate-400">Documents</p>
-          <h2 className="mt-3 text-4xl font-bold text-white">96</h2>
-        </div>
+                <Icon
+                  size={22}
+                  className="text-indigo-400"
+                />
+              </div>
 
-        <div className="rounded-2xl border border-slate-800 bg-slate-900 p-5">
-          <p className="text-slate-400">Messages Today</p>
-          <h2 className="mt-3 text-4xl font-bold text-white">1.2k</h2>
+              <h2 className="text-4xl font-bold text-white">
+                {stat.value}
+              </h2>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Recent Activity */}
+      <div className="rounded-2xl border border-slate-800 bg-slate-900 p-6">
+        <h2 className="mb-4 text-xl font-semibold text-white">
+          Recent Activity
+        </h2>
+
+        <div className="space-y-3">
+          <div className="rounded-xl bg-slate-800 p-3 text-slate-300">
+            New document created in Project Roadmap
+          </div>
+
+          <div className="rounded-xl bg-slate-800 p-3 text-slate-300">
+            Ajay joined #development channel
+          </div>
+
+          <div className="rounded-xl bg-slate-800 p-3 text-slate-300">
+            Sprint Planning document updated
+          </div>
         </div>
       </div>
     </div>

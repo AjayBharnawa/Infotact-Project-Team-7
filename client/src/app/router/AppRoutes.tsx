@@ -11,6 +11,7 @@ import Members from "../../features/workspace/pages/Members";
 import Settings from "../../features/workspace/pages/Settings";
 import ProtectedRoute from "./ProtectedRoute";
 
+
 const AppRoutes = () => {
   return (
     <BrowserRouter>
@@ -66,9 +67,9 @@ const AppRoutes = () => {
 
         {/* 404 Fallback */}
         <Route
-          path="*"
-          element={<Navigate to="/workspace/dashboard" replace />}
-        />
+  path="*"
+  element={<Navigate to="/login" replace />}
+/>
       </Routes>
     </BrowserRouter>
   );
