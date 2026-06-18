@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../store/authStore";
+import { APP_NAME } from "../../config/app";
 
 import {
   Bell,
@@ -36,8 +37,8 @@ const Navbar = ({
         </button>
 
         <h1 className="text-lg font-semibold">
-          NexTeam
-        </h1>
+  {APP_NAME}
+</h1>
       </div>
 
       <div className="flex items-center gap-4">
