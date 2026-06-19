@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../../store/authStore";
 
@@ -8,12 +9,45 @@ const LoginForm = () => {
   const navigate = useNavigate();
   const login = useAuthStore((state) => state.login);
 
+  const [email, setEmail] = useState("");
+  const [password, setPassword] =
+    useState("");
+  const [error, setError] = useState("");
+
   const handleLogin = () => {
+    setError("");
+
+    if (!email.trim()) {
+      setError("Email is required");
+      return;
+    }
+
+    if (
+      !/\S+@\S+\.\S+/.test(email)
+    ) {
+      setError(
+        "Please enter a valid email"
+      );
+      return;
+    }
+
+    if (!password.trim()) {
+      setError("Password is required");
+      return;
+    }
+
+    if (password.length < 6) {
+      setError(
+        "Password must be at least 6 characters"
+      );
+      return;
+    }
+
     login(
       {
         id: "1",
         name: "Ajay",
-        email: "ajay@example.com",
+        email,
       },
       "fake-jwt-token"
     );
@@ -23,6 +57,12 @@ const LoginForm = () => {
 
   return (
     <div className="space-y-5">
+      {error && (
+        <div className="rounded-lg border border-red-500 bg-red-500/10 p-3 text-sm text-red-400">
+          {error}
+        </div>
+      )}
+
       <div>
         <label className="mb-2 block text-sm text-slate-300">
           Email
@@ -31,6 +71,10 @@ const LoginForm = () => {
         <Input
           type="email"
           placeholder="Enter your email"
+          value={email}
+          onChange={(e) =>
+            setEmail(e.target.value)
+          }
         />
       </div>
 
@@ -42,6 +86,10 @@ const LoginForm = () => {
         <Input
           type="password"
           placeholder="Enter your password"
+          value={password}
+          onChange={(e) =>
+            setPassword(e.target.value)
+          }
         />
       </div>
 
