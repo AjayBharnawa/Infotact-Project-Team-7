@@ -8,6 +8,7 @@ import { useWorkspaceStore } from "../../../store/workspaceStore";
 const Channels = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [channelName, setChannelName] = useState("");
+  const [search, setSearch] = useState("");
 
   const channels = useWorkspaceStore(
     (state) => state.channels
@@ -15,6 +16,12 @@ const Channels = () => {
 
   const addChannel = useWorkspaceStore(
     (state) => state.addChannel
+  );
+
+  const filteredChannels = channels.filter((channel) =>
+    channel.name
+      .toLowerCase()
+      .includes(search.toLowerCase())
   );
 
   const handleCreateChannel = () => {
@@ -48,22 +55,38 @@ const Channels = () => {
           </button>
         </div>
 
-        <div className="space-y-4">
-          {channels.map((channel) => (
-            <div
-              key={channel.id}
-              className="flex items-center gap-3 rounded-2xl border border-slate-800 bg-slate-900 p-4 transition hover:border-indigo-500"
-            >
-              <Hash
-                size={18}
-                className="text-indigo-400"
-              />
+        <input
+          type="text"
+          placeholder="Search channels..."
+          value={search}
+          onChange={(e) =>
+            setSearch(e.target.value)
+          }
+          className="mb-4 w-full rounded-xl border border-slate-700 bg-slate-800 px-4 py-3 text-white outline-none focus:border-indigo-500"
+        />
 
-              <span className="text-white">
-                {channel.name}
-              </span>
+        <div className="space-y-4">
+          {filteredChannels.length === 0 ? (
+            <div className="rounded-2xl border border-slate-800 bg-slate-900 p-6 text-center text-slate-400">
+              No channels found
             </div>
-          ))}
+          ) : (
+            filteredChannels.map((channel) => (
+              <div
+                key={channel.id}
+                className="flex items-center gap-3 rounded-2xl border border-slate-800 bg-slate-900 p-4 transition hover:border-indigo-500"
+              >
+                <Hash
+                  size={18}
+                  className="text-indigo-400"
+                />
+
+                <span className="text-white">
+                  {channel.name}
+                </span>
+              </div>
+            ))
+          )}
         </div>
       </div>
 
