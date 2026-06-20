@@ -43,8 +43,8 @@ const Channels = () => {
       <div>
         <div className="mb-8 flex items-center justify-between">
           <h1 className="text-3xl font-bold text-white">
-            Channels
-          </h1>
+  Channels ({channels.length})
+</h1>
 
           <button
             onClick={() => setIsOpen(true)}

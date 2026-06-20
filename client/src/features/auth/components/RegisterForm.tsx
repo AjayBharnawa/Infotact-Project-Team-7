@@ -100,7 +100,7 @@ const RegisterForm = () => {
 
       <div>
         <label className="mb-2 block text-sm text-slate-300">
-          Password
+          Password 
         </label>
 
         <Input
@@ -127,6 +127,7 @@ const RegisterForm = () => {
               e.target.value
             )
           }
+          
         />
       </div>
 
